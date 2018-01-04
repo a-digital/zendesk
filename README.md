@@ -36,7 +36,8 @@ A config.php is included with an example of 2 custom fields we have set up for o
 
 Below is a very basic example of a front end form which will be able to submit a ticket through this plugin to Zendesk. If you wish to add your own custom fields to this form, just define them in the plugins config file and then add the inputs to the form. Make sure that you are matching the input name attribute with the config fieldName value.
 
-```<form method="post" accept-charset="utf-8">
+```
+<form method="post" accept-charset="utf-8">
 	<input type="hidden" name="action" value="zendesk/default/submit">
 	{{ redirectInput('support/thank-you') }}
 	<input type="hidden" name="success" value="/support/thank-you">
@@ -61,6 +62,7 @@ Below is a very basic example of a front end form which will be able to submit a
 	<input type="text" name="body">
 	
 	<button type="submit">Raise Ticket</button>
-</form>```
+</form>
+```
 
 Brought to you by [Matt Shearing](https://adigital.agency)
