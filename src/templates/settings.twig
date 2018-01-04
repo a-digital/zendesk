@@ -1,0 +1,66 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Zendesk plugin for Craft CMS 3.x
+ *
+ * Zendesk Settings.twig
+ *
+ * @author    Matt Shearing
+ * @copyright Copyright (c) 2018 Matt Shearing
+ * @link      https://adigital.agency
+ * @package   Zendesk
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("adigital\\zendesk\\assetbundles\\zendesk\\ZendeskAsset") %}
+
+{{ forms.textField({
+    label: "Api Key"|t('app'),
+    instructions: "Your Zendesk API key"|t('app'),
+    id: 'api_key',
+    name: 'api_key',
+    value: settings.api_key,
+    required: true,
+    errors: settings.getErrors('api_key')
+}) }}
+
+{{ forms.textField({
+    label: "User"|t('app'),
+    instructions: "Email address of account owner"|t('app'),
+    id: 'user',
+    name: 'user',
+    value: settings.user,
+    required: true,
+    errors: settings.getErrors('user')
+}) }}
+
+{{ forms.textField({
+    label: "Url"|t('app'),
+    instructions: "The api url for zendesk"|t('app'),
+    id: 'url',
+    name: 'url',
+    value: settings.url,
+    required: true,
+    errors: settings.getErrors('url')
+}) }}
+
+{{ forms.textField({
+    label: "Widget Name"|t('app'),
+    instructions: "A custom title for the support form"|t('app'),
+    id: 'widgetName',
+    name: 'widgetName',
+    value: settings.widgetName,
+    errors: settings.getErrors('widgetName')
+}) }}
+
+{{ forms.textField({
+    label: "Ticket Url"|t('app'),
+    instructions: "An individual tickets url minus the ticketId"|t('app'),
+    id: 'ticketUrl',
+    name: 'ticketUrl',
+    value: settings.ticketUrl,
+    errors: settings.getErrors('ticketUrl')
+}) }}

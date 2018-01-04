@@ -1,0 +1,34 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Zendesk plugin for Craft CMS
+ *
+ * ZendeskWidget Widget Settings
+ *
+ * @author    Matt Shearing
+ * @copyright Copyright (c) 2018 Matt Shearing
+ * @link      https://adigital.agency
+ * @package   Zendesk
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("adigital\\zendesk\\assetbundles\\zendesk\\ZendeskAsset") %}
+
+{{ forms.textField({
+    label: 'Name',
+    instructions: 'Please enter your name.',
+    id: 'name',
+    name: 'name',
+    value: widget['name']})
+}}
+
+{{ forms.textField({
+    label: 'Email',
+    instructions: 'Enter your email address.',
+    id: 'email',
+    name: 'email',
+    value: widget['email']})
+}}

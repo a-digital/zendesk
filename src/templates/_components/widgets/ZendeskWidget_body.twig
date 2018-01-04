@@ -1,0 +1,103 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Zendesk plugin for Craft CMS
+ *
+ * ZendeskWidget Widget Body
+ *
+ * @author    Matt Shearing
+ * @copyright Copyright (c) 2018 Matt Shearing
+ * @link      https://adigital.agency
+ * @package   Zendesk
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("adigital\\zendesk\\assetbundles\\zendeskwidgetwidget\\ZendeskWidgetWidgetAsset") %}
+
+{% set iconUrl = view.getAssetManager().getPublishedUrl('@adigital/zendesk/assetbundles/zendeskwidgetwidget/dist', true) ~ '/img/ZendeskWidget-icon.svg' %}
+
+<div>
+	<div style="display: inline-block; width: 20%;">
+		<img src="{{ iconUrl }}" height="50" width="50" />
+	</div>
+	<div style="display: inline-block; width: 78%;">
+		<p>Please use the form below to raise any questions or get help with an issue using the site.</p>
+	</div>
+</div>
+
+<form method="post" id="zendeskWidgetForm" accept-charset="UTF-8" enctype="multipart/form-data">
+	{{ csrfInput() }}
+	
+	{{ forms.selectField({
+	    label: 'Type',
+	    name: 'type',
+	    options: {
+            "question": "Question"|t,
+            "incident": "Incident"|t,
+            "problem": "Problem"|t,
+            "task": "Task"|t,
+        },
+	    value: ''})
+	}}
+	
+	{{ forms.selectField({
+	    label: 'Priority',
+	    name: 'priority',
+	    options: {
+            "low": "Low"|t,
+            "normal": "Medium"|t,
+            "high": "High"|t,
+            "urgent": "Critical"|t,
+        },
+	    value: ''})
+	}}
+	
+	{% for customField in customFields %}
+		{% if customField["fieldType"] == "select" %}
+			{% set customOptions = {} %}
+			{% for option in customField["fieldValues"] %}
+				{% set optionValue = option["value"] %}
+				{% set optionLabel = option["label"] %}
+				{% set customOptions = customOptions|merge({ (option.value): option.label }) %}
+			{% endfor %}
+			{{ forms.selectField({
+			    label: customField["fieldLabel"],
+			    name: customField["fieldName"],
+			    options: customOptions,
+			    value: ''})
+			}}
+		{% elseif customField["fieldType"] == "text" %}
+			{{ forms.textField({
+			    label: customField["fieldLabel"],
+			    placeholder: 'Enter your subject here.',
+			    name: customField["fieldName"], 
+			    value: ''})
+			}}
+		{% elseif customField["fieldType"] == "hidden" %}
+			<input type="hidden" name="{{ customField["fieldName"] }}" id="{{ customField["fieldName"] }}" value="{{ customField["fieldValue"] }}" />
+		{% endif %}
+	{% endfor %}
+	
+	{{ forms.textField({
+	    label: 'Subject',
+	    placeholder: 'Enter your subject here.',
+	    name: 'subject', 
+	    value: ''})
+	}}
+	
+	{{ forms.textareaField({
+	    label: 'Comment',
+	    placeholder: 'Enter your comment here.',
+	    name: 'comment',
+	    rows: 4,
+	    value: ''})
+	}}
+	
+	<input type="hidden" name="name" id="setting_name" value="{{ name }}" />
+	<input type="hidden" name="email" id="setting_email" value="{{ email }}" />
+	
+	<input type="submit" class="btn submit" name="zendeskTicketSubmit" value="{{ 'Send'|t }}" />
+</form>
