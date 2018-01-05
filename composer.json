@@ -11,7 +11,7 @@
         "zendesk"
     ],
     "support": {
-        "docs": "https://github.com/a-digital/zendesk",
+        "docs": "https://github.com/a-digital/zendesk/blob/master/README.md",
         "issues": "https://github.com/a-digital/zendesk/issues"
     },
     "license": "MIT",
