@@ -1,6 +1,9 @@
 # Zendesk Changelog
 
 ## 1.0.1 - 2018-06-26
+### Fixed
+- Errors related to missing zendesk.php config file if not created
+
 ### Added
 - Allow body inputs on the frontend form to submit as arrays e.g. `body[]`
 - Body arrays can now have defined keys `body[requestName]`
