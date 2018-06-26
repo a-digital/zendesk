@@ -98,10 +98,12 @@ class DefaultController extends Controller
 			'email' => $request->getParam('email'),
 			'customFields' => []
 	    ];
-	    $customFields = Craft::$app->getConfig()->getConfigFromFile("zendesk")["customFields"];
-	    foreach($customFields as $field) {
-		    if ($request->getParam($field["fieldName"]) <> "") {
-		    	$data["customFields"][$field["fieldId"]] = $request->getParam($field["fieldName"]);
+	    if (Craft::$app->getConfig()->getConfigFromFile("zendesk")) {
+		    $customFields = Craft::$app->getConfig()->getConfigFromFile("zendesk")["customFields"];
+		    foreach($customFields as $field) {
+			    if ($request->getParam($field["fieldName"]) <> "") {
+			    	$data["customFields"][$field["fieldId"]] = $request->getParam($field["fieldName"]);
+			    }
 		    }
 	    }
 	    $ticketId = Zendesk::$plugin->zendeskService->submitTicket($data);
@@ -132,10 +134,12 @@ class DefaultController extends Controller
 			'email' => $request->getParam('email'),
 			'customFields' => []
 	    ];
-	    $customFields = Craft::$app->getConfig()->getConfigFromFile("zendesk")["customFields"];
-	    foreach($customFields as $field) {
-		    if ($request->getParam($field["fieldName"]) <> "") {
-		    	$data["customFields"][$field["fieldId"]] = $request->getParam($field["fieldName"]);
+	    if (Craft::$app->getConfig()->getConfigFromFile("zendesk")) {
+		    $customFields = Craft::$app->getConfig()->getConfigFromFile("zendesk")["customFields"];
+		    foreach($customFields as $field) {
+			    if ($request->getParam($field["fieldName"]) <> "") {
+			    	$data["customFields"][$field["fieldId"]] = $request->getParam($field["fieldName"]);
+			    }
 		    }
 	    }
 	    $ticketId = Zendesk::$plugin->zendeskService->submitTicket($data);
