@@ -74,11 +74,26 @@ class DefaultController extends Controller
     {
 	    $request = Craft::$app->getRequest();
 	    $method = $request->getParam('redirect');
+	    $body = $request->getParam('body');
+	    if (is_array($body)) {
+		    $formattedBody = "";
+		    foreach($body as $field => $value) {
+			    if (isset($value) && $value <> '') {
+				    if (is_numeric($field)) {
+					    $formattedBody .= $value."\n";
+				    } else {
+					    $field = ucwords(preg_replace('~(\p{Ll})(\p{Lu})~u','${1} ${2}', $field));
+					    $formattedBody .= $field.": ".$value."\n";
+				    }
+			    }
+		    }
+		    $body = $formattedBody;
+	    }
 	    $data = [
 		    'subject' => $request->getParam('subject'),
 			'priority' => $request->getParam('priority'),
 			'type' => $request->getParam('type'),
-			'body' => $request->getParam('body'),
+			'body' => $body,
 			'name' => $request->getParam('name'),
 			'email' => $request->getParam('email'),
 			'customFields' => []
