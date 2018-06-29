@@ -46,24 +46,26 @@ class ZendeskService extends Component
     public function submitTicket($data)
     {
 		//build up the json array
-		$create = json_encode(
-			[
-				'ticket' => [
-					'subject' => $data['subject'],
-					'priority' => $data['priority'],
-					'status' => 'new',
-					'type' => $data['type'],
-					'comment' => [
-						'body' => $data['body']
-					],
-					'custom_fields' => $data["customFields"],
-					'requester' => [
-						'name' => $data['name'],
-						'email' => $data['email']
-					]
+		$create = [
+			'ticket' => [
+				'subject' => $data['subject'],
+				'priority' => $data['priority'],
+				'status' => 'new',
+				'type' => $data['type'],
+				'comment' => [
+					'body' => $data['body']
+				],
+				'custom_fields' => $data["customFields"],
+				'requester' => [
+					'name' => $data['name'],
+					'email' => $data['email']
 				]
 			]
-		);
+		];
+		if (isset($data["token"]) && $data["token"] <> '') {
+			$create["ticket"]["comment"]["uploads"] = [$data["token"]];
+		}
+		$create = json_encode($create);
 
 		//send all this to zendesk using our curl wrapper
 		$output = self::curlWrap("/tickets.json", $create);
