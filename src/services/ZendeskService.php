@@ -66,9 +66,10 @@ class ZendeskService extends Component
 			$create["ticket"]["comment"]["uploads"] = [$data["token"]];
 		}
 		$create = json_encode($create);
+		$headers = ['Content-type: application/json'];
 
 		//send all this to zendesk using our curl wrapper
-		$output = self::curlWrap("/tickets.json", $create);
+		$output = self::curlWrap("/tickets.json", $create, $headers);
 		
 		//get the ticket ID - also checks the new ticket was created successfully
 		$ticketId = $output->ticket->id;
@@ -80,7 +81,7 @@ class ZendeskService extends Component
 		return false;
     }
     
-    public function curlWrap($url, $json)
+    public function curlWrap($url, $data, $headers)
 	{
 		$settings = Zendesk::$plugin->getSettings();
 	    $zdApiKey = $settings->api_key;
@@ -92,10 +93,10 @@ class ZendeskService extends Component
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 10 );
 		curl_setopt($ch, CURLOPT_URL, $zdUrl.$url);
 		curl_setopt($ch, CURLOPT_USERPWD, $zdUser."/token:".$zdApiKey);
-		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 		curl_setopt($ch, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		$output = curl_exec($ch);
