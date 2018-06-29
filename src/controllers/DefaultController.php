@@ -98,6 +98,10 @@ class DefaultController extends Controller
 			'email' => $request->getParam('email'),
 			'customFields' => []
 	    ];
+	    if (count($_FILES)) {
+		    $token = Zendesk::$plugin->zendeskService->submitAttachments($_FILES);
+		    $data['token'] = $token;
+	    }
 	    if (Craft::$app->getConfig()->getConfigFromFile("zendesk")) {
 		    $customFields = Craft::$app->getConfig()->getConfigFromFile("zendesk")["customFields"];
 		    foreach($customFields as $field) {
