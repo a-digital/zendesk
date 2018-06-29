@@ -1,5 +1,12 @@
 # Zendesk Changelog
 
+## 1.0.2 - 2018-06-29
+### Added
+- File upload functionality added to front end form, add files using `attachments[]` in upload field names
+
+### Changed
+- Updated readme file example code to include file upload fields
+
 ## 1.0.1 - 2018-06-26
 ### Fixed
 - Errors related to missing zendesk.php config file if not created
