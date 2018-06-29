@@ -37,29 +37,30 @@ A config.php is included with an example of 2 custom fields we have set up for o
 Below is a very basic example of a front end form which will be able to submit a ticket through this plugin to Zendesk. If you wish to add your own custom fields to this form, just define them in the plugins config file and then add the inputs to the form. Make sure that you are matching the input name attribute with the config fieldName value.
 
 ```
-<form method="post" accept-charset="utf-8">
+<form method="post" accept-charset="utf-8" enctype="multipart/form-data">
 	<input type="hidden" name="action" value="zendesk/default/submit">
 	{{ redirectInput('support/thank-you') }}
 	<input type="hidden" name="success" value="/support/thank-you">
 	<input type="hidden" name="failed" value="/support/failed">
 	{{ csrfInput() }}
 	
-	<input type="text" name="name">
-	<input type="text" name="email">
-	<select name="type">
+	Name: <input type="text" name="name">
+	Email: <input type="text" name="email">
+	Type: <select name="type">
 		<option value="question">Question</option>
 		<option value="incident">Incident</option>
 		<option value="problem">Problem</option>
 		<option value="task">Task</option>
 	</select>
-	<select name="priority">
+	Priority: <select name="priority">
 		<option value="low">Low</option>
 		<option value="normal">Normal</option>
 		<option value="high">High</option>
 		<option value="urgent">Urgent</option>
 	</select>
-	<input type="text" name="subject">
-	<input type="text" name="body">
+	Subject: <input type="text" name="subject">
+	Body: <input type="text" name="body">
+	Attachment(s): <input type="file" name="attachments[]" multiple>
 	
 	<button type="submit">Raise Ticket</button>
 </form>
