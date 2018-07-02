@@ -1,5 +1,9 @@
 # Zendesk Changelog
 
+## 1.0.3 - 2018-07-02
+### Added
+- File upload functionality added to dashboard widget
+
 ## 1.0.2 - 2018-06-29
 ### Added
 - File upload functionality added to front end form, add files using `attachments[]` in upload field names
