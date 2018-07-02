@@ -15,6 +15,8 @@ $(document).ready(function(){
 		var formBody = $(this).parent();
 		var response;
 		var submission = new FormData(this);
+		$(this).find("input[name='zendeskTicketSubmit']").hide();
+		$(this).find("div[name='loadingSpinner']").show();
 		$.ajax({
 			url : "/actions/zendesk/default/support-ticket",
 			type: "POST",
