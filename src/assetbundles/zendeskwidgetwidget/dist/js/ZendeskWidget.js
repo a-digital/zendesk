@@ -27,6 +27,9 @@ $(document).ready(function(){
 		$("#zendeskWidgetForm textarea").each(function(){
 			fields[$(this).attr("name")] = $(this).val();
 		});
+		$("#zendeskWidgetForm input[type='file']").each(function(){
+			fields[$(this).attr("name")] = $(this).val();
+		});
 		$.post("/actions/zendesk/default/support-ticket", fields).done(function(data){
 			response = data;
 		}).fail(function(){
