@@ -71,7 +71,7 @@ class ZendeskPlugin extends BasePlugin
      */
     public function getDocumentationUrl()
     {
-        return '???';
+        return 'https://github.com/a-digital/zendesk/blob/craft2/README.md';
     }
 
     /**
@@ -83,7 +83,7 @@ class ZendeskPlugin extends BasePlugin
      */
     public function getReleaseFeedUrl()
     {
-        return '???';
+        return 'https://github.com/a-digital/zendesk/blob/craft2/releases.json';
     }
 
     /**
