@@ -1,0 +1,34 @@
+{#
+/**
+ * Zendesk plugin for Craft CMS
+ *
+ * ZendeskWidget Settings
+ *
+ * @author    Matt Shearing
+ * @copyright Copyright (c) 2018 Matt Shearing
+ * @link      http://adigital.agency
+ * @package   Zendesk
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% includeCssResource "zendesk/css/Zendesk_Style.css" %}
+{% includeJsResource "zendesk/js/Zendesk_Script.js" %}
+
+{{ forms.textField({
+    label: 'Name',
+    instructions: 'Please enter your name.',
+    id: 'name',
+    name: 'name',
+    value: settings['name']})
+}}
+
+{{ forms.textField({
+    label: 'Email',
+    instructions: 'Enter your email address.',
+    id: 'email',
+    name: 'email',
+    value: settings['email']})
+}}

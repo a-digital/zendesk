@@ -1,44 +1,14 @@
 {
-    "name": "adigital/zendesk",
-    "description": "Creates a new support ticket in Zendesk using the JSON API",
-    "type": "craft-plugin",
-    "version": "1.0.3",
-    "keywords": [
-        "craft",
-        "cms",
-        "craftcms",
-        "craft-plugin",
-        "zendesk"
-    ],
-    "support": {
-        "docs": "https://github.com/a-digital/zendesk/blob/master/README.md",
-        "issues": "https://github.com/a-digital/zendesk/issues"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Matt Shearing",
-            "homepage": "https://adigital.agency"
-        }
-    ],
-    "require": {
-        "craftcms/cms": "^3.0.0-RC1"
-    },
-    "autoload": {
-        "psr-4": {
-          "adigital\\zendesk\\": "src/"
-        }
-    },
-    "extra": {
-        "name": "Zendesk",
-        "handle": "zendesk",
-        "schemaVersion": "1.0.0",
-        "hasCpSettings": true,
-        "hasCpSection": false,
-        "changelogUrl": "https://github.com/a-digital/zendesk/blob/master/CHANGELOG.md",
-        "components": {
-            "zendeskService": "adigital\\zendesk\\services\\ZendeskService"
-        },
-        "class": "adigital\\zendesk\\Zendesk"
-    }
+	"name": "/zendesk",
+	"description": "Allow users to post a support ticket into zendesk from a dashboard widget",
+	"type": "craft-plugin",
+	"authors": [
+		{
+			"name": "Matt Shearing",
+			"homepage": "http://adigital.agency"
+		}
+	],
+	"require": {
+		"composer/installers": "~1.0"
+	}
 }

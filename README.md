@@ -1,26 +1,19 @@
-# Zendesk plugin for Craft CMS 3.x
+# Zendesk plugin for Craft CMS
 
 Creates a new support ticket in Zendesk using the JSON API
 
-![Screenshot](resources/img/plugin-logo.svg)
-
-## Requirements
-
-This plugin requires Craft CMS 3.0.0-beta.23 or later.
+![Screenshot](resources/screenshots/plugin_logo.png)
 
 ## Installation
 
-To install the plugin, follow these instructions.
+To install Zendesk, follow these steps:
 
-1. Open your terminal and go to your Craft project:
+1. Download & unzip the file and place the `zendesk` directory into your `craft/plugins` directory
+2.  -OR- do a `git clone ???` directly into your `craft/plugins` folder.  You can then update it with `git pull`
+3. Install plugin in the Craft Control Panel under Settings > Plugins
+4. The plugin folder should be named `zendesk` for Craft to see it.  GitHub recently started appending `-master` (the branch name) to the name of the folder for zip file downloads.
 
-        cd /path/to/project
-
-2. Then tell Composer to load the plugin:
-
-        composer require adigital/zendesk
-
-3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Zendesk.
+Zendesk works on Craft 2.4.x and Craft 2.5.x.
 
 ## Zendesk Overview
 
@@ -38,11 +31,11 @@ Below is a very basic example of a front end form which will be able to submit a
 
 ```
 <form method="post" accept-charset="utf-8" enctype="multipart/form-data">
-	<input type="hidden" name="action" value="zendesk/default/submit">
-	{{ redirectInput('support/thank-you') }}
+	<input type="hidden" name="action" value="zendesk/submit">
+	<input type="hidden" name="redirect" value="/support/thank-you">
 	<input type="hidden" name="success" value="/support/thank-you">
 	<input type="hidden" name="failed" value="/support/failed">
-	{{ csrfInput() }}
+	{{ getCsrfInput() }}
 	
 	Name: <input type="text" name="name">
 	Email: <input type="text" name="email">
