@@ -1,5 +1,9 @@
 # Zendesk Changelog
 
+## 1.0.4 - 2018-07-26
+### Fixed
+- Undefined index: customFields error is now resolved
+
 ## 1.0.3 - 2018-07-02
 ### Added
 - File upload functionality added to dashboard widget

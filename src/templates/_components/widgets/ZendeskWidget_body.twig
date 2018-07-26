@@ -55,31 +55,33 @@
 	    value: ''})
 	}}
 	
-	{% for customField in customFields %}
-		{% if customField["fieldType"] == "select" %}
-			{% set customOptions = {} %}
-			{% for option in customField["fieldValues"] %}
-				{% set optionValue = option["value"] %}
-				{% set optionLabel = option["label"] %}
-				{% set customOptions = customOptions|merge({ (option.value): option.label }) %}
-			{% endfor %}
-			{{ forms.selectField({
-			    label: customField["fieldLabel"],
-			    name: customField["fieldName"],
-			    options: customOptions,
-			    value: ''})
-			}}
-		{% elseif customField["fieldType"] == "text" %}
-			{{ forms.textField({
-			    label: customField["fieldLabel"],
-			    placeholder: 'Enter your subject here.',
-			    name: customField["fieldName"], 
-			    value: ''})
-			}}
-		{% elseif customField["fieldType"] == "hidden" %}
-			<input type="hidden" name="{{ customField["fieldName"] }}" id="{{ customField["fieldName"] }}" value="{{ customField["fieldValue"] }}" />
-		{% endif %}
-	{% endfor %}
+	{% if customFields is defined %}
+		{% for customField in customFields %}
+			{% if customField["fieldType"] == "select" %}
+				{% set customOptions = {} %}
+				{% for option in customField["fieldValues"] %}
+					{% set optionValue = option["value"] %}
+					{% set optionLabel = option["label"] %}
+					{% set customOptions = customOptions|merge({ (option.value): option.label }) %}
+				{% endfor %}
+				{{ forms.selectField({
+				    label: customField["fieldLabel"],
+				    name: customField["fieldName"],
+				    options: customOptions,
+				    value: ''})
+				}}
+			{% elseif customField["fieldType"] == "text" %}
+				{{ forms.textField({
+				    label: customField["fieldLabel"],
+				    placeholder: 'Enter your subject here.',
+				    name: customField["fieldName"], 
+				    value: ''})
+				}}
+			{% elseif customField["fieldType"] == "hidden" %}
+				<input type="hidden" name="{{ customField["fieldName"] }}" id="{{ customField["fieldName"] }}" value="{{ customField["fieldValue"] }}" />
+			{% endif %}
+		{% endfor %}
+	{% endif %}
 	
 	{{ forms.textField({
 	    label: 'Subject',

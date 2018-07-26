@@ -228,14 +228,17 @@ class ZendeskWidget extends Widget
     public function getBodyHtml()
     {
         Craft::$app->getView()->registerAssetBundle(ZendeskWidgetWidgetAsset::class);
-
+		$widgetOptions = [
+            'name' => $this->name,
+            'email' => $this->email
+        ];
+        if (Craft::$app->getConfig()->getConfigFromFile("zendesk")) {
+	        $widgetOptions['customFields'] = Craft::$app->getConfig()->getConfigFromFile("zendesk")["customFields"];
+        }
+		
         return Craft::$app->getView()->renderTemplate(
             'zendesk/_components/widgets/ZendeskWidget_body',
-            [
-                'name' => $this->name,
-                'email' => $this->email,
-                'customFields' => Craft::$app->getConfig()->getConfigFromFile("zendesk")["customFields"]
-            ]
+            $widgetOptions
         );
     }
 }
