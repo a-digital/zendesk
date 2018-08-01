@@ -1,5 +1,9 @@
 # Zendesk Changelog
 
+## 1.0.5 - 2018-08-01
+### Fixed
+- Updated icon mask file as it was previously missing
+
 ## 1.0.4 - 2018-07-26
 ### Fixed
 - Undefined index: customFields error is now resolved
