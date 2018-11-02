@@ -2,7 +2,7 @@
 
 ## 1.0.6 - 2018-11-02
 ### Fixed
-- Detected issue with tickets when attachments filed was left blank
+- Issue with ticket submission when attachments field was left blank
 
 ## 1.0.5 - 2018-08-01
 ### Fixed
