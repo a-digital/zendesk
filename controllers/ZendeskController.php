@@ -81,7 +81,9 @@ class ZendeskController extends BaseController
 	    );
 	    if (count($_FILES)) {
 		    $token = craft()->zendesk->submitAttachments($_FILES);
-		    $data['token'] = $token;
+		    if ($token !== false) {
+		    	$data['token'] = $token;
+		    }
 	    }
 	    if (craft()->config->get("customFields", "zendesk")) {
 		    $customFields = craft()->config->get("customFields", "zendesk");
