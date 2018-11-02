@@ -1,5 +1,9 @@
 # Zendesk Changelog
 
+## 1.0.6 - 2018-11-02
+### Fixed
+- Detected issue with tickets when attachments filed was left blank
+
 ## 1.0.5 - 2018-08-01
 ### Fixed
 - Updated icon mask file as it was previously missing

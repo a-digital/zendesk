@@ -86,16 +86,17 @@ class ZendeskService extends Component
 	    $token = false;
 	    foreach($attachments["attachments"]["name"] as $key => $filename) {
 		    $file = $attachments["attachments"]["tmp_name"][$key];
-		    
-		    $filedata = file_get_contents($file);
-		    $url = '/uploads.json?filename=' . str_replace(" ", "_", $filename);
-		    if (isset($token) && $token <> '') {
-			    $url .= '&token=' . $token;
-		    }
-		    $headers = ['Content-Type: application/binary', 'Accept: application/json; charset=utf-8'];
-		    $output = self::curlWrap($url, $filedata, $headers);
-		    if ($key === 0) {
-			    $token = $output->upload->token;
+		    if (isset($file) && $file <> '') {
+			    $filedata = file_get_contents($file);
+			    $url = '/uploads.json?filename=' . str_replace(" ", "_", $filename);
+			    if (isset($token) && $token <> '') {
+				    $url .= '&token=' . $token;
+			    }
+			    $headers = ['Content-Type: application/binary', 'Accept: application/json; charset=utf-8'];
+			    $output = self::curlWrap($url, $filedata, $headers);
+			    if ($key === 0) {
+				    $token = $output->upload->token;
+			    }
 		    }
 	    }
 	    

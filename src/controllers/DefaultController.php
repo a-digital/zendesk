@@ -100,7 +100,9 @@ class DefaultController extends Controller
 	    ];
 	    if (count($_FILES)) {
 		    $token = Zendesk::$plugin->zendeskService->submitAttachments($_FILES);
-		    $data['token'] = $token;
+		    if ($token !== false) {
+		    	$data['token'] = $token;
+		    }
 	    }
 	    if (Craft::$app->getConfig()->getConfigFromFile("zendesk")) {
 		    $customFields = Craft::$app->getConfig()->getConfigFromFile("zendesk")["customFields"];
