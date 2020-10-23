@@ -72,7 +72,7 @@ class ZendeskService extends Component
 		$output = self::curlWrap("/tickets.json", $create, $headers);
 		
 		//get the ticket ID - also checks the new ticket was created successfully
-                if($output->error) {
+                if(!empty($output->error)) {
                         throw new \Exception('Zendesk Error: ' . $output->error);
                 }
                 $ticketId = $output->ticket ? $output->ticket->id : null;
