@@ -1,5 +1,9 @@
 # Zendesk Changelog
 
+## 1.0.8 - 2020-11-03
+### Changed
+- Merged [devinellis](https://github.com/devinellis) pull request - Zendesk error response now throws an exception
+
 ## 1.0.7 - 2020-11-03
 ### Fixed
 - Composer 2 compatibility - Asset bundle PSR-4 autoloading standard
