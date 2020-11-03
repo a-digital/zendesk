@@ -1,5 +1,9 @@
 # Zendesk Changelog
 
+## 1.0.7 - 2020-11-03
+### Fixed
+- Composer 2 compatibility - Asset bundle PSR-4 autoloading standard
+
 ## 1.0.6 - 2018-11-02
 ### Fixed
 - Issue with ticket submission when attachments field was left blank
