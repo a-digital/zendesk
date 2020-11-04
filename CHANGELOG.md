@@ -1,5 +1,10 @@
 # Zendesk Changelog
 
+## 1.0.9 - 2020-11-04
+### Fixed
+- Asset bundle sourcePath not correctly defined since 1.0.7
+
+
 ## 1.0.8 - 2020-11-03
 ### Changed
 - Merged [devinellis](https://github.com/devinellis) pull request - Zendesk error response now throws an exception

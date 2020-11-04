@@ -43,7 +43,7 @@ class ZendeskAsset extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = "@adigital/zendesk/assetbundles/zendesk/dist";
+        $this->sourcePath = "@adigital/zendesk/assetbundles/Zendesk/dist";
 
         // define the dependencies
         $this->depends = [
