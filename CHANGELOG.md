@@ -1,5 +1,9 @@
 # Zendesk Changelog
 
+## 1.0.10 - 2020-11-24
+### Changed
+- Updated plugin logo
+
 ## 1.0.9 - 2020-11-04
 ### Fixed
 - Asset bundle sourcePath not correctly defined since 1.0.7
