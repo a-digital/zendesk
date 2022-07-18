@@ -40,7 +40,7 @@ class ZendeskWidget extends Widget
     public $name = '';
     public $email = '';
     
-    public function init()
+    public function init(): void
     {
         parent::init();
         
@@ -85,7 +85,7 @@ class ZendeskWidget extends Widget
      *
      * @return int|null The widget’s maximum colspan, if it has one
      */
-    public static function maxColspan()
+    public static function maxColspan(): ?int
     {
         return null;
     }
@@ -103,7 +103,7 @@ class ZendeskWidget extends Widget
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge(
@@ -208,7 +208,7 @@ class ZendeskWidget extends Widget
      *
      * @return string|null
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate(
             'zendesk/_components/widgets/ZendeskWidget_settings',
@@ -225,7 +225,7 @@ class ZendeskWidget extends Widget
      *                      should not be visible. (If you don’t want the widget
      *                      to be selectable in the first place, use {@link isSelectable()}.)
      */
-    public function getBodyHtml()
+    public function getBodyHtml(): ?string
     {
         Craft::$app->getView()->registerAssetBundle(ZendeskWidgetWidgetAsset::class);
 		$widgetOptions = [
