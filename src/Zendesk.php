@@ -24,7 +24,11 @@ use craft\services\Dashboard;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use yii\base\Event;
+use yii\base\Exception;
 
 /**
  * Craft plugins are very much like little applications in and of themselves. We’ve made
@@ -159,7 +163,11 @@ class Zendesk extends Plugin
      * Returns the rendered settings HTML, which will be inserted into the content
      * block on the settings page.
      *
-     * @return string The rendered settings HTML
+     * @return string
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
      */
     protected function settingsHtml(): string
     {

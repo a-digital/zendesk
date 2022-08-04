@@ -15,6 +15,10 @@ use adigital\zendesk\assetbundles\zendeskwidgetwidget\ZendeskWidgetWidgetAsset;
 
 use Craft;
 use craft\base\Widget;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use yii\base\Exception;
 use yii\base\InvalidConfigException;
 
 /**
@@ -197,6 +201,10 @@ class ZendeskWidget extends Widget
      * [[\craft\web\View::registerJs()]].
      *
      * @return string|null
+     * @throws Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getSettingsHtml(): ?string
     {
@@ -211,12 +219,16 @@ class ZendeskWidget extends Widget
     /**
      * Returns the widget's body HTML.
      *
-     * @return string|false The widget’s body HTML, or `false` if the widget
+     * @return string|null The widget’s body HTML, or `false` if the widget
      *                      should not be visible. (If you don’t want the widget
      *                      to be selectable in the first place, use {@link isSelectable()}.)
      * @throws InvalidConfigException
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
      */
-    public function getBodyHtml(): bool|string
+    public function getBodyHtml(): ?string
     {
         Craft::$app->getView()->registerAssetBundle(ZendeskWidgetWidgetAsset::class);
 		$widgetOptions = [
