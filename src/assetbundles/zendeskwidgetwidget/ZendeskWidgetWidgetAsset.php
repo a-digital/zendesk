@@ -10,7 +10,6 @@
 
 namespace adigital\zendesk\assetbundles\zendeskwidgetwidget;
 
-use Craft;
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
@@ -40,7 +39,7 @@ class ZendeskWidgetWidgetAsset extends AssetBundle
     /**
      * Initializes the bundle.
      */
-    public function init()
+    public function init(): void
     {
         // define the path that your publishable resources live
         $this->sourcePath = "@adigital/zendesk/assetbundles/zendeskwidgetwidget/dist";

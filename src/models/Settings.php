@@ -10,9 +10,6 @@
 
 namespace adigital\zendesk\models;
 
-use adigital\zendesk\Zendesk;
-
-use Craft;
 use craft\base\Model;
 
 /**
@@ -39,11 +36,11 @@ class Settings extends Model
      *
      * @var string
      */
-    public $api_key = '';
-    public $user = '';
-    public $url = '';
-    public $widgetName = '';
-    public $ticketUrl = '';
+    public string $api_key = '';
+    public string $user = '';
+    public string $url = '';
+    public string $widgetName = '';
+    public string $ticketUrl = '';
 
     // Public Methods
     // =========================================================================
@@ -58,7 +55,7 @@ class Settings extends Model
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['api_key', 'string'],

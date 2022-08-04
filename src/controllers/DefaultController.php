@@ -14,6 +14,7 @@ use adigital\zendesk\Zendesk;
 
 use Craft;
 use craft\web\Controller;
+use yii\web\Response;
 
 /**
  * Default Controller
@@ -55,9 +56,9 @@ class DefaultController extends Controller
      * Handle a request going to our plugin's index action URL,
      * e.g.: actions/zendesk/default
      *
-     * @return mixed
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $result = 'Welcome to the DefaultController actionIndex() method';
 
@@ -68,9 +69,9 @@ class DefaultController extends Controller
      * Handle a request going to our plugin's actionsubmit URL,
      * e.g.: actions/zendesk/default/submit
      *
-     * @return mixed
+     * @return Response
      */
-    public function actionSubmit()
+    public function actionSubmit(): Response
     {
 	    $request = Craft::$app->getRequest();
 	    $method = $request->getParam('redirect');
@@ -125,9 +126,9 @@ class DefaultController extends Controller
      * Handle a request going to our plugin's actionsubmit URL,
      * e.g.: actions/zendesk/default/support-ticket
      *
-     * @return mixed
+     * @return string
      */
-    public function actionSupportTicket()
+    public function actionSupportTicket(): string
     {
 	    $request = Craft::$app->getRequest();
 	    $method = $request->getParam('redirect');

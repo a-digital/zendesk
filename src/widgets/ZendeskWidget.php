@@ -15,6 +15,7 @@ use adigital\zendesk\assetbundles\zendeskwidgetwidget\ZendeskWidgetWidgetAsset;
 
 use Craft;
 use craft\base\Widget;
+use yii\base\InvalidConfigException;
 
 /**
  * Zendesk Widget
@@ -37,10 +38,10 @@ class ZendeskWidget extends Widget
     /**
      * @var string The message to display
      */
-    public $name = '';
-    public $email = '';
+    public string $name = '';
+    public string $email = '';
     
-    public function init()
+    public function init(): void
     {
         parent::init();
         
@@ -75,19 +76,9 @@ class ZendeskWidget extends Widget
      *
      * @return string|null The path to the widget’s SVG icon
      */
-    public static function iconPath()
+    public static function iconPath(): ?string
     {
         return Craft::getAlias("@adigital/zendesk/assetbundles/zendeskwidgetwidget/dist/img/ZendeskWidget-icon.svg");
-    }
-
-    /**
-     * Returns the widget’s maximum colspan.
-     *
-     * @return int|null The widget’s maximum colspan, if it has one
-     */
-    public static function maxColspan()
-    {
-        return null;
     }
 
     // Public Methods
@@ -103,17 +94,16 @@ class ZendeskWidget extends Widget
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
-        $rules = array_merge(
+        return array_merge(
             $rules,
             [
                 ['name', 'string'],
                 ['email', 'string']
             ]
         );
-        return $rules;
     }
 
     /**
@@ -208,7 +198,7 @@ class ZendeskWidget extends Widget
      *
      * @return string|null
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate(
             'zendesk/_components/widgets/ZendeskWidget_settings',
@@ -224,8 +214,9 @@ class ZendeskWidget extends Widget
      * @return string|false The widget’s body HTML, or `false` if the widget
      *                      should not be visible. (If you don’t want the widget
      *                      to be selectable in the first place, use {@link isSelectable()}.)
+     * @throws InvalidConfigException
      */
-    public function getBodyHtml()
+    public function getBodyHtml(): bool|string
     {
         Craft::$app->getView()->registerAssetBundle(ZendeskWidgetWidgetAsset::class);
 		$widgetOptions = [

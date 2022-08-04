@@ -15,6 +15,7 @@ use adigital\zendesk\models\Settings;
 use adigital\zendesk\widgets\ZendeskWidget as ZendeskWidgetWidget;
 
 use Craft;
+use craft\base\Model;
 use craft\base\Plugin;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
@@ -54,7 +55,7 @@ class Zendesk extends Plugin
      *
      * @var Zendesk
      */
-    public static $plugin;
+    public static Zendesk $plugin;
 
     // Public Methods
     // =========================================================================
@@ -70,7 +71,7 @@ class Zendesk extends Plugin
      * you do not need to load it in your init() method.
      *
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
         self::$plugin = $this;
@@ -79,7 +80,7 @@ class Zendesk extends Plugin
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
+            static function (RegisterUrlRulesEvent $event) {
                 $event->rules['zendesk/actionSupportTicket'] = 'zendesk/default/support-ticket';
             }
         );
@@ -88,7 +89,7 @@ class Zendesk extends Plugin
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
+            static function (RegisterUrlRulesEvent $event) {
 	            $event->rules['zendesk/actionSupportTicket'] = 'zendesk/support-ticket';
             }
         );
@@ -97,7 +98,7 @@ class Zendesk extends Plugin
         Event::on(
             Dashboard::class,
             Dashboard::EVENT_REGISTER_WIDGET_TYPES,
-            function (RegisterComponentTypesEvent $event) {
+            static function (RegisterComponentTypesEvent $event) {
                 $event->types[] = ZendeskWidgetWidget::class;
             }
         );
@@ -147,9 +148,9 @@ class Zendesk extends Plugin
     /**
      * Creates and returns the model used to store the plugin’s settings.
      *
-     * @return \craft\base\Model|null
+     * @return Model|null
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): Model|Settings|null
     {
         return new Settings();
     }
