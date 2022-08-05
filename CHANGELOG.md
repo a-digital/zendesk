@@ -1,5 +1,9 @@
 # Zendesk Changelog
 
+## 2.0.0 - 2022-08-05
+### Added
+- Craft 4 version released
+
 ## 1.0.10 - 2020-11-24
 ### Changed
 - Updated plugin logo
