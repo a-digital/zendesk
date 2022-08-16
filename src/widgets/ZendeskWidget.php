@@ -15,6 +15,11 @@ use adigital\zendesk\assetbundles\zendeskwidgetwidget\ZendeskWidgetWidgetAsset;
 
 use Craft;
 use craft\base\Widget;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use yii\base\Exception;
+use yii\base\InvalidConfigException;
 
 /**
  * Zendesk Widget
@@ -37,8 +42,8 @@ class ZendeskWidget extends Widget
     /**
      * @var string The message to display
      */
-    public $name = '';
-    public $email = '';
+    public string $name = '';
+    public string $email = '';
     
     public function init(): void
     {
@@ -75,19 +80,9 @@ class ZendeskWidget extends Widget
      *
      * @return string|null The path to the widget’s SVG icon
      */
-    public static function iconPath()
+    public static function iconPath(): ?string
     {
         return Craft::getAlias("@adigital/zendesk/assetbundles/zendeskwidgetwidget/dist/img/ZendeskWidget-icon.svg");
-    }
-
-    /**
-     * Returns the widget’s maximum colspan.
-     *
-     * @return int|null The widget’s maximum colspan, if it has one
-     */
-    public static function maxColspan(): ?int
-    {
-        return null;
     }
 
     // Public Methods
@@ -106,14 +101,13 @@ class ZendeskWidget extends Widget
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules = array_merge(
+        return array_merge(
             $rules,
             [
                 ['name', 'string'],
                 ['email', 'string']
             ]
         );
-        return $rules;
     }
 
     /**
@@ -207,6 +201,10 @@ class ZendeskWidget extends Widget
      * [[\craft\web\View::registerJs()]].
      *
      * @return string|null
+     * @throws Exception
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function getSettingsHtml(): ?string
     {
@@ -221,9 +219,14 @@ class ZendeskWidget extends Widget
     /**
      * Returns the widget's body HTML.
      *
-     * @return string|false The widget’s body HTML, or `false` if the widget
+     * @return string|null The widget’s body HTML, or `false` if the widget
      *                      should not be visible. (If you don’t want the widget
      *                      to be selectable in the first place, use {@link isSelectable()}.)
+     * @throws InvalidConfigException
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws Exception
      */
     public function getBodyHtml(): ?string
     {

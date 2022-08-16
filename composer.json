@@ -2,7 +2,7 @@
     "name": "adigital/zendesk",
     "description": "Creates a new support ticket in Zendesk using the JSON API",
     "type": "craft-plugin",
-    "version": "1.0.10",
+    "version": "2.0.0",
     "keywords": [
         "craft",
         "cms",

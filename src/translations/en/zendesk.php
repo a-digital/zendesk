@@ -22,4 +22,6 @@
  */
 return [
     'Zendesk plugin loaded' => 'Zendesk plugin loaded',
+    '{name} plugin loaded' => '{name} plugin loaded',
+    'Raise a ticket' => 'Raise a ticket'
 ];

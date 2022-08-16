@@ -12,8 +12,9 @@ namespace adigital\zendesk\services;
 
 use adigital\zendesk\Zendesk;
 
-use Craft;
 use craft\base\Component;
+use Exception;
+use JsonException;
 
 /**
  * ZendeskService Service
@@ -41,9 +42,11 @@ class ZendeskService extends Component
      *
      *     Zendesk::$plugin->zendeskService->submitTicket()
      *
-     * @return mixed
+     * @param $data
+     * @return false|string
+     * @throws Exception
      */
-    public function submitTicket($data)
+    public function submitTicket($data): bool|string
     {
 		//build up the json array
 		$create = [
@@ -69,22 +72,26 @@ class ZendeskService extends Component
 		$headers = ['Content-type: application/json'];
 
 		//send all this to zendesk using our curl wrapper
-		$output = self::curlWrap("/tickets.json", $create, $headers);
+		$output = $this->curlWrap("/tickets.json", $create, $headers);
 		
 		//get the ticket ID - also checks the new ticket was created successfully
                 if(!empty($output->error)) {
-                        throw new \Exception('Zendesk Error: ' . $output->error);
+                        throw new Exception('Zendesk Error: ' . $output->error);
                 }
                 $ticketId = $output->ticket ? $output->ticket->id : null;
 		
-		//if return exists and we've a ticket ID - it must have been created successfully :-)
+		//if return exists, and we've a ticket ID - it must have been created successfully :-)
 		if ($output && $ticketId) {
 			return $ticketId;
 		}
 		return false;
     }
-    
-    public function submitAttachments($attachments)
+
+    /**
+     * @param $attachments
+     * @return false|string
+     */
+    public function submitAttachments($attachments): bool|string
     {
 	    $token = false;
 	    foreach($attachments["attachments"]["name"] as $key => $filename) {
@@ -96,7 +103,7 @@ class ZendeskService extends Component
 				    $url .= '&token=' . $token;
 			    }
 			    $headers = ['Content-Type: application/binary', 'Accept: application/json; charset=utf-8'];
-			    $output = self::curlWrap($url, $filedata, $headers);
+			    $output = $this->curlWrap($url, $filedata, $headers);
 			    if ($key === 0) {
 				    $token = $output->upload->token;
 			    }
@@ -105,9 +112,16 @@ class ZendeskService extends Component
 	    
 		return $token;
     }
-    
-    public function curlWrap($url, $data, $headers)
-	{
+
+    /**
+     * @param $url
+     * @param $data
+     * @param $headers
+     * @return mixed
+     * @throws JsonException
+     */
+    public function curlWrap($url, $data, $headers): mixed
+    {
 		$settings = Zendesk::$plugin->getSettings();
 	    $zdApiKey = $settings->api_key;
 	    $zdUser = $settings->user;
@@ -126,8 +140,7 @@ class ZendeskService extends Component
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		$output = curl_exec($ch);
 		curl_close($ch);
-		
-		$decoded = json_decode($output);
-		return $decoded;
+
+        return json_decode($output, false, 512, JSON_THROW_ON_ERROR);
 	}
 }
